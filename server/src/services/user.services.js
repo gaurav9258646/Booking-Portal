@@ -5,4 +5,8 @@ const registerUserService = async ({ name, email, password }) => {
   return await newUser.save();
 };
 
-module.exports = {registerUserService };  
+const loginDB = async ({email}) => {
+  return await User.find({email})
+}
+
+module.exports = {registerUserService, loginDB };  
