@@ -1,4 +1,4 @@
-const Booking = require('../model/Bookings');
+const Booking = require("../model/Bookings");
 
 // Create a new booking
 const createBooking = async (bookingData) => {
@@ -8,20 +8,25 @@ const createBooking = async (bookingData) => {
 
 // Get a single booking by ID
 const getBookingById = async (bookingId) => {
-  const booking = await Booking.findById(bookingId)
-    .populate('user_id')
-    .populate('room_id');
-  return booking;
+  return await Booking.findById(bookingId)
+    .populate("user_id")
+    .populate({
+      path: "room_id",
+      populate: { path: "hotel_id" }
+    });
 };
 
 // Get all bookings (optionally filtered)
 const getAllBookings = async (filters = {}) => {
   return await Booking.find(filters)
-    .populate('user_id')
-    .populate('room_id');
+    .populate("user_id")
+    .populate({
+      path: "room_id",
+      populate: { path: "hotel_id" }
+    });
 };
 
-// Update a booking's status
+// Update booking status
 const updateBookingStatus = async (bookingId, newStatus) => {
   return await Booking.findByIdAndUpdate(
     bookingId,
@@ -30,7 +35,16 @@ const updateBookingStatus = async (bookingId, newStatus) => {
   );
 };
 
-// Delete a booking
+// Update payment status
+const updatePaymentStatus = async (bookingId, newPaymentStatus) => {
+  return await Booking.findByIdAndUpdate(
+    bookingId,
+    { payment_status: newPaymentStatus },
+    { new: true }
+  );
+};
+
+// Delete booking
 const deleteBooking = async (bookingId) => {
   return await Booking.findByIdAndDelete(bookingId);
 };
@@ -40,5 +54,6 @@ module.exports = {
   getBookingById,
   getAllBookings,
   updateBookingStatus,
-  deleteBooking
+  updatePaymentStatus,
+  deleteBooking,
 };

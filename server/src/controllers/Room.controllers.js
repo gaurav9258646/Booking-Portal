@@ -1,4 +1,4 @@
-const roomService = require('../services/Room.services');
+const roomService = require("../services/Room.services");
 
 // Create room
 const createRoom = async (req, res) => {
@@ -10,7 +10,7 @@ const createRoom = async (req, res) => {
   }
 };
 
-// Get all rooms
+// Get all rooms (with filters)
 const getAllRooms = async (req, res) => {
   try {
     const rooms = await roomService.getAllRooms(req.query);
@@ -24,7 +24,7 @@ const getAllRooms = async (req, res) => {
 const getRoomById = async (req, res) => {
   try {
     const room = await roomService.getRoomById(req.params.id);
-    if (!room) return res.status(404).json({ message: 'Room not found' });
+    if (!room) return res.status(404).json({ message: "Room not found" });
     res.json(room);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -35,7 +35,7 @@ const getRoomById = async (req, res) => {
 const updateRoom = async (req, res) => {
   try {
     const room = await roomService.updateRoom(req.params.id, req.body);
-    if (!room) return res.status(404).json({ message: 'Room not found' });
+    if (!room) return res.status(404).json({ message: "Room not found" });
     res.json(room);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -46,8 +46,8 @@ const updateRoom = async (req, res) => {
 const deleteRoom = async (req, res) => {
   try {
     const result = await roomService.deleteRoom(req.params.id);
-    if (!result) return res.status(404).json({ message: 'Room not found' });
-    res.json({ message: 'Room deleted successfully' });
+    if (!result) return res.status(404).json({ message: "Room not found" });
+    res.json({ message: "Room deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -58,5 +58,5 @@ module.exports = {
   getAllRooms,
   getRoomById,
   updateRoom,
-  deleteRoom
+  deleteRoom,
 };

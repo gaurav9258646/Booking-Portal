@@ -18,9 +18,6 @@ app.use("/hotels", hotelRoutes)
 app.use("/booking",BookingRoutes)
 app.use("/room",RoomRoutes)
 
-
-
-
 const PORT =3000;
 
 app.listen(PORT,()=>{

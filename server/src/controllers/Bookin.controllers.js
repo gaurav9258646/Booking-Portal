@@ -1,4 +1,4 @@
-const bookingService = require('../services/Booking.services');
+const bookingService = require("../services/Booking.services");
 
 // Create booking
 const createBooking = async (req, res) => {
@@ -14,9 +14,7 @@ const createBooking = async (req, res) => {
 const getBookingById = async (req, res) => {
   try {
     const booking = await bookingService.getBookingById(req.params.id);
-    if (!booking) {
-      return res.status(404).json({ message: 'Booking not found' });
-    }
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
     res.json(booking);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -40,9 +38,21 @@ const updateBookingStatus = async (req, res) => {
       req.params.id,
       req.body.booking_status
     );
-    if (!booking) {
-      return res.status(404).json({ message: 'Booking not found' });
-    }
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
+    res.json(booking);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Update payment status
+const updatePaymentStatus = async (req, res) => {
+  try {
+    const booking = await bookingService.updatePaymentStatus(
+      req.params.id,
+      req.body.payment_status
+    );
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
     res.json(booking);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -53,10 +63,8 @@ const updateBookingStatus = async (req, res) => {
 const deleteBooking = async (req, res) => {
   try {
     const result = await bookingService.deleteBooking(req.params.id);
-    if (!result) {
-      return res.status(404).json({ message: 'Booking not found' });
-    }
-    res.json({ message: 'Booking deleted successfully' });
+    if (!result) return res.status(404).json({ message: "Booking not found" });
+    res.json({ message: "Booking deleted successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -67,5 +75,6 @@ module.exports = {
   getBookingById,
   getAllBookings,
   updateBookingStatus,
-  deleteBooking
+  updatePaymentStatus,
+  deleteBooking,
 };

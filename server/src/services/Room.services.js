@@ -1,4 +1,4 @@
-const Room = require('../model/Room');
+const Room = require("../model/Room");
 
 // Create room
 const createRoom = async (roomData) => {
@@ -6,7 +6,7 @@ const createRoom = async (roomData) => {
   return await room.save();
 };
 
-// Get all rooms
+// Get all rooms (optionally filtered)
 const getAllRooms = async (filters = {}) => {
   return await Room.find(filters).populate("hotel_id");
 };
@@ -31,5 +31,5 @@ module.exports = {
   getAllRooms,
   getRoomById,
   updateRoom,
-  deleteRoom
+  deleteRoom,
 };
