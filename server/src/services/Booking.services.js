@@ -1,59 +1,25 @@
-const Booking = require("../model/Bookings");
+const Bookings = require("../model/Bookings");
 
-// Create a new booking
-const createBooking = async (bookingData) => {
-  const newBooking = new Booking(bookingData);
-  return await newBooking.save();
+
+const createbookingDB = async(bookinData)=>{
+    const Booking = new Bookings(bookinData);
+    return await Booking.save()
+
+};
+const  getAllBookingDB  = async()=>{
+    return await  Bookings.find();
 };
 
-// Get a single booking by ID
-const getBookingById = async (bookingId) => {
-  return await Booking.findById(bookingId)
-    .populate("user_id")
-    .populate({
-      path: "room_id",
-      populate: { path: "hotel_id" }
-    });
+const getbookingbyidDB = async(id)=>{
+    return await Bookings.findById(id)
+
 };
 
-// Get all bookings (optionally filtered)
-const getAllBookings = async (filters = {}) => {
-  return await Booking.find(filters)
-    .populate("user_id")
-    .populate({
-      path: "room_id",
-      populate: { path: "hotel_id" }
-    });
-};
+const updatabookingDB = async(id)=>{
+    return await Bookings.findByIdAndUpdate(id);
+}
 
-// Update booking status
-const updateBookingStatus = async (bookingId, newStatus) => {
-  return await Booking.findByIdAndUpdate(
-    bookingId,
-    { booking_status: newStatus },
-    { new: true }
-  );
-};
-
-// Update payment status
-const updatePaymentStatus = async (bookingId, newPaymentStatus) => {
-  return await Booking.findByIdAndUpdate(
-    bookingId,
-    { payment_status: newPaymentStatus },
-    { new: true }
-  );
-};
-
-// Delete booking
-const deleteBooking = async (bookingId) => {
-  return await Booking.findByIdAndDelete(bookingId);
-};
-
-module.exports = {
-  createBooking,
-  getBookingById,
-  getAllBookings,
-  updateBookingStatus,
-  updatePaymentStatus,
-  deleteBooking,
-};
+const deletebookingDB = async(id)=>{
+    return await Bookings.findByIdAndDelete(id)
+}
+module.exports ={createbookingDB,getAllBookingDB,getbookingbyidDB,updatabookingDB,deletebookingDB}

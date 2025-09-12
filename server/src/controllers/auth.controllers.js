@@ -1,10 +1,15 @@
-const  {registerUserService, loginDB}= require("../services/user.services");
+const  {registerUserService, loginDB}= require("../services/auth.services");
 const { generateToken } = require("../utils");
 
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    if(!name || !email || !password){
+      return res.json({
+        success:false,
+        error:"All field are required"
+      });
+    }
     const user = await registerUserService({ name, email, password });
 
     res.status(201).json({
@@ -12,27 +17,34 @@ const registerUser = async (req, res) => {
       user,
     });
   } catch (error) {
+    console.log(error);
+    if(error.code===11000){
+      return res.json({
+        success:false,
+        error:"Already User Exists"
+      });
+    }
     res.status(500).json({ 
-      message: "Error registering user",      
-      error: error.message, 
+     success:false,
+     error:"registration faield" 
     });
   }
 };
 
 const login = async(req, res) => {
-  const {email, password} = req.body;
-  if(!email){
-    return res.json({
-      success:false,
-      message:"Email is required!"
-    });
-  }
-  if(!password){
-    return res.json({
-      success:false,
-      message:"Password is required!"
-    });
-  }
+  const {email} = req.body;
+  // if(!email || !password){
+  //   return res.json({
+  //     success:false,
+  //     message:"Email is required!"
+  //   });
+  // }
+  // if(!password){
+  //   return res.json({
+  //     success:false,
+  //     message:"Password is required!"
+  //   });
+  // }
   try {
     const user = await loginDB({email});
     if(!user){
@@ -52,7 +64,11 @@ const login = async(req, res) => {
       data: {user,accesstoken,reftoken}
     });
   } catch (error) {
-    console.log(error||"something went wrong")
+    console.log(error);
+    return res.json({
+      success:false,
+      error:"login failed"
+    })
   }
 }
 module.exports = { registerUser, login };

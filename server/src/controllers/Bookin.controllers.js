@@ -1,80 +1,120 @@
-const bookingService = require("../services/Booking.services");
+const { 
+  createbookingDB,
+  getAllBookingDB,
+  getbookingbyidDB,
+  updatabookingDB,
+  deletebookingDB 
+} = require("../services/Booking.services");
 
-// Create booking
 const createBooking = async (req, res) => {
   try {
-    const booking = await bookingService.createBooking(req.body);
-    res.status(201).json(booking);
+    const data = await createbookingDB(req.body);
+    return res.status(201).json({
+      success: true,
+      message: "Booking created successfully!",
+      data,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error);
+    return res.status(400).json({
+      success: false,
+      error: "Booking not created",
+    });
   }
 };
 
-// Get booking by ID
-const getBookingById = async (req, res) => {
+const allBooking = async (req, res) => {
   try {
-    const booking = await bookingService.getBookingById(req.params.id);
-    if (!booking) return res.status(404).json({ message: "Booking not found" });
-    res.json(booking);
+    const data = await getAllBookingDB();
+    return res.json({
+      success: true,
+      message: "All booking list",
+      data,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
   }
 };
 
-// Get all bookings
-const getAllBookings = async (req, res) => {
+const bookingById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const bookings = await bookingService.getAllBookings(req.query);
-    res.json(bookings);
+    const data = await getbookingbyidDB(id);
+    if (!data) {
+      return res.status(404).json({
+        success: false,
+        error: "Booking not found",
+      });
+    }
+    return res.json({
+      success: true,
+      message: "Booking found",
+      data,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      error: "Something went wrong",
+    });
   }
 };
 
-// Update booking status
-const updateBookingStatus = async (req, res) => {
+const updateBooking = async (req, res) => {
+  const { id } = req.params;
   try {
-    const booking = await bookingService.updateBookingStatus(
-      req.params.id,
-      req.body.booking_status
-    );
-    if (!booking) return res.status(404).json({ message: "Booking not found" });
-    res.json(booking);
+    const data = await updatabookingDB(id, req.body);
+    if (!data) {
+      return res.status(404).json({
+        success: false,
+        error: "Booking not found",
+      });
+    }
+    return res.json({
+      success: true,
+      message: "Booking updated successfully!",
+      data,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error);
+    return res.status(400).json({
+      success: false,
+      error: "Booking not updated",
+    });
   }
 };
 
-// Update payment status
-const updatePaymentStatus = async (req, res) => {
-  try {
-    const booking = await bookingService.updatePaymentStatus(
-      req.params.id,
-      req.body.payment_status
-    );
-    if (!booking) return res.status(404).json({ message: "Booking not found" });
-    res.json(booking);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-// Delete booking
 const deleteBooking = async (req, res) => {
+  const { id } = req.params;
   try {
-    const result = await bookingService.deleteBooking(req.params.id);
-    if (!result) return res.status(404).json({ message: "Booking not found" });
-    res.json({ message: "Booking deleted successfully" });
+    const data = await deletebookingDB(id);
+    if (!data) {
+      return res.status(404).json({
+        success: false,
+        error: "Booking not found",
+      });
+    }
+    return res.json({
+      success: true,
+      message: "Booking deleted successfully!",
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      error: "Something went wrong",
+    });
   }
 };
 
 module.exports = {
   createBooking,
-  getBookingById,
-  getAllBookings,
-  updateBookingStatus,
-  updatePaymentStatus,
+  allBooking,
+  bookingById,
+  updateBooking,
   deleteBooking,
 };
