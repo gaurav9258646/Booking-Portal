@@ -9,7 +9,11 @@ const generateSlug=(name)=>{
       const accessToken= jwt.sign(data,process.env.JWT_SECRET,{expiresIn:"30d"});
       const refreshToken= jwt.sign(data,process.env.JWT_SECRET,{expiresIn:"30d"});
       return {accessToken,refreshToken};
+  };
+
+  const verifyToken = (token)=>{
+    return jwt.verify(token,process.env.JWT_SECRET);
   }
 
-  module.exports={generateSlug,generateToken};
+  module.exports={generateSlug,generateToken,verifyToken };
 

@@ -1,4 +1,5 @@
 const express = require("express");
+const role = require("../../middleware/auth.middeware")
 const router = express.Router();
 const {
   createHotel,
@@ -8,10 +9,10 @@ const {
   deleteHotel
 } = require("../../controllers/Admin/hotel.controllers");
 
-router.post("/create", createHotel);     
-router.get("/all", getAllHotels);        
-router.get("/:slug", getHotelBySlug);    
-router.put("/update/:id", updateHotel);  
-router.delete("/delete/:id", deleteHotel); 
+router.post("/create",role(["admin"]), createHotel);     
+router.get("/all",role(["admin"]), getAllHotels);        
+router.get("/:slug",role(["admin"]), getHotelBySlug);    
+router.put("/update/:id", role(["admin"]),updateHotel);  
+router.delete("/delete/:id", role(["admin"]),deleteHotel); 
 
 module.exports = router;

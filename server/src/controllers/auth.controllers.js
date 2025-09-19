@@ -1,74 +1,72 @@
-const  {registerUserService, loginDB}= require("../services/auth.services");
-const { generateToken } = require("../utils");
+const { registerUserDB, finduserDB } = require("../services/auth.services");
+const { generateToken } = require("../utils/index");
 
-const registerUser = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    if(!name || !email || !password){
-      return res.json({
-        success:false,
-        error:"All field are required"
-      });
+const register=async(req,res)=>{
+    const {name,email,password,phone,role}=req.body;
+    if(!name || !email || !password || !phone){
+        return res.json({
+            success:false,
+            error:"All field are required",
+            required:["name", "email", "password", "phone"],
+        });
     }
-    const user = await registerUserService({ name, email, password });
-
-    res.status(201).json({
-      message: "User registered successfully",
-      user,
-    });
-  } catch (error) {
-    console.log(error);
-    if(error.code===11000){
-      return res.json({
-        success:false,
-        error:"Already User Exists"
-      });
+    try {
+        const user=await registerUserDB({name,email,password,phone,role:role || "user"});
+        return res.json({
+            success:true,
+            data:user,
+            message:"User are register successfully"
+        })
+    } catch (error) {
+        console.log("address create error ",error)
+        if(error.code===11000){
+            return res.json({
+                success:false,
+                error:"User already exists!"
+            });
+        }
+        res.json({
+            success:false,
+            error:"User registration failed"
+        })
     }
-    res.status(500).json({ 
-     success:false,
-     error:"registration faield" 
-    });
-  }
-};
-
-const login = async(req, res) => {
-  const {email} = req.body;
-  // if(!email || !password){
-  //   return res.json({
-  //     success:false,
-  //     message:"Email is required!"
-  //   });
-  // }
-  // if(!password){
-  //   return res.json({
-  //     success:false,
-  //     message:"Password is required!"
-  //   });
-  // }
-  try {
-    const user = await loginDB({email});
-    if(!user){
-      return res.json({
-        success:false,
-        message:"User not found!"
-      });
-    }
-  const {accesstoken,reftoken} = generateToken({
-    id:user._id,
-    name:user.name,
-    password:user.password
-  })
-    return res.json({
-      success:true,
-      message:"User loggedIn successfully",
-      data: {user,accesstoken,reftoken}
-    });
-  } catch (error) {
-    console.log(error);
-    return res.json({
-      success:false,
-      error:"login failed"
-    })
-  }
 }
-module.exports = { registerUser, login };
+
+const login=async(req,res)=>{
+    const {email,password}=req.body;
+    if(!email || !password){
+        return res.json({
+            success:false,
+            error:"All fields are required",
+        });
+    }
+    try {
+        const user=await finduserDB(email)
+        if(!user){
+            return res.json({
+                success:false,
+                error:"user does't exist!"
+            })
+        }
+
+        const {accessToken,refreshToken}= generateToken({
+            id:user._id,
+            name:user.name,
+            email:user.email,
+            role:user.role,
+        });
+        return res.json({
+            success:true,
+            message:"user loggnied successfully",
+            data:{user,accessToken,refreshToken},
+        })
+    } catch (error) {
+        return res.json({
+            success:false,
+            error:"something went wrong",
+        })
+    }
+}
+
+
+module.exports={register,login}

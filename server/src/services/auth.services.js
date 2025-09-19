@@ -1,12 +1,14 @@
 const User = require("../model/user");
 
-const registerUserService = async ({ name, email, password }) => {
-  const newUser = new User({ name, email, password });
-  return await newUser.save();
+const registerUserDB=async({name,email,password,phone,role})=>{
+    const newuser= new User({name,email,password,phone,role:role||"user"});
+     await newuser.save();
+     return newuser;
 };
 
-const loginDB = async ({email}) => {
-  return await User.find({email})
+const finduserDB=async(email)=>{
+    const user= await User.findOne({email});
+        return user;
 }
 
-module.exports = {registerUserService, loginDB };  
+module.exports={registerUserDB,finduserDB}
