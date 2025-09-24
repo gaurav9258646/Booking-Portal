@@ -1,0 +1,42 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid #d1d5db; /* gray-300 */
+  height: 50px;
+  user-select: none;
+  background-color: white;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toggle {
+  cursor: pointer;
+  display: block;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoutBtn {
+  background-color: #f87171; /* red-400 */
+  cursor: pointer;
+  padding: 2px 8px;
+  font-size: 0.75rem; /* text-xs */
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+}

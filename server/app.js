@@ -1,4 +1,5 @@
 const  express = require("express");
+const cors = require("cors")
 const connectDB = require ("./src/config/db")
 const userRoutes = require("./src/routes/auth.routes");
 const hotelRoutes = require("./src/routes/Admin/hotels.routes")
@@ -9,6 +10,7 @@ const  app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 connectDB();
+app.use(cors())
 
 app.use(express.json())
 app.get("/",(req,res)=>{

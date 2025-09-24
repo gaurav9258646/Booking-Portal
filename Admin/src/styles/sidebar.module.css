@@ -1,0 +1,40 @@
+.sidebar {
+  width: 200px;
+  height: calc(100vh - 50px);
+  border-right: 1px solid #d1d5db; /* gray-300 */
+  background-color: white;
+  overflow: hidden;
+}
+
+.linkContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #374151; /* gray-700 */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #2563eb; /* blue-600 */
+}
+
+.active {
+  background-color: #bfdbfe; /* blue-100 */
+  color: #2563eb; /* blue-600 */
+  font-weight: 600;
+}
+
+.icon {
+  font-size: 1.125rem; /* text-lg */
+}
