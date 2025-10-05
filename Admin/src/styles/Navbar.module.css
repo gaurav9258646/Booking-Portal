@@ -1,42 +1,98 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #0f172a;
+  color: #f8fafc;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 8px 16px;
-  border-bottom: 1px solid #d1d5db; /* gray-300 */
-  height: 50px;
-  user-select: none;
-  background-color: white;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 1200;
 }
 
-.left {
+.logoBox {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-.toggle {
-  cursor: pointer;
-  display: block;
+.logo {
+  width: 98px;
+  height: 98px;
+  object-fit: contain;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 4px 8px;
+  width: 260px;
+  transition: 0.3s ease;
+}
+
+.searchBox input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f8fafc;
+  font-size: 0.9rem;
+  flex: 1;
+  padding: 4px 8px;
+}
+
+.searchBox button {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.searchBox button:hover {
+  color: #f8fafc;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
+}
+
+.userIcon {
+  color: #e2e8f0;
+  font-size: 1.3rem;
 }
 
 .logoutBtn {
-  background-color: #f87171; /* red-400 */
-  cursor: pointer;
-  padding: 2px 8px;
-  font-size: 0.75rem; /* text-xs */
+  background-color: #ef4444;
   color: white;
+  border: none;
+  padding: 6px 14px;
+  font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #dc2626;
 }

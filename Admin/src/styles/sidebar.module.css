@@ -1,40 +1,50 @@
 .sidebar {
-  width: 200px;
-  height: calc(100vh - 50px);
-  border-right: 1px solid #d1d5db; /* gray-300 */
-  background-color: white;
-  overflow: hidden;
+  width: 230px;
+  height: calc(100vh - 64px);
+  background-color: #0f172a;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 16px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  z-index: 1100;
 }
 
 .linkContainer {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 20px;
+  padding: 1rem 0.5rem;
 }
 
 .link {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #374151; /* gray-700 */
+  color: #cbd5e1;
   text-decoration: none;
-  transition: all 0.2s ease;
+  padding: 10px 16px;
+  border-radius: 10px;
+  margin: 4px 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
 }
 
 .link:hover {
-  background-color: #f3f4f6; /* gray-100 */
-  color: #2563eb; /* blue-600 */
+  background-color: #1e293b;
+  color: #fff;
 }
 
 .active {
-  background-color: #bfdbfe; /* blue-100 */
-  color: #2563eb; /* blue-600 */
-  font-weight: 600;
+  background-color: #2563eb;
+  color: white;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
 }
 
 .icon {
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.1rem;
 }

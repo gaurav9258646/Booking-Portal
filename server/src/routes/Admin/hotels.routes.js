@@ -13,6 +13,6 @@ router.post("/create",role(["admin"]), createHotel);
 router.get("/all",role(["admin"]), getAllHotels);        
 router.get("/:slug",role(["admin"]), getHotelBySlug);    
 router.put("/update/:id", role(["admin"]),updateHotel);  
-router.delete("/delete/:id", role(["admin"]),deleteHotel); 
+router.delete("/:id", role(["admin"]),deleteHotel); 
 
 module.exports = router;

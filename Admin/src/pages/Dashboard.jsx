@@ -4,8 +4,7 @@ import Layout from "../Components/Layout"
 function Dashboard() {
   return (
     <Layout>
-    <div>
-    </div>
+    rstdyui
       
     </Layout>
   )

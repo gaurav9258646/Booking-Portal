@@ -1,0 +1,12 @@
+.body {
+  display: flex;
+  margin-top: 64px; 
+}
+
+.children {
+  flex: 1;
+  margin-left: 230px; 
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+  background-color: #f8fafc;
+}

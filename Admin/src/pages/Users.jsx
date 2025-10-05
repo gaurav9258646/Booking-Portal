@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../Components/Layout';
 
 function Users() {
   return (
-    <div>Users</div>
+    <Layout>Users</Layout>
   )
 }
 

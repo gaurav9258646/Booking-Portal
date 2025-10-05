@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../Components/Layout';
 
 function Setting() {
   return (
-    <div>Setting</div>
+    <Layout>Setting</Layout>
   )
 }
 
