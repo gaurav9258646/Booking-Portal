@@ -74,14 +74,14 @@ const Hotels = () => {
             </thead>
             <tbody>
               {data.map((hotel) => (
-                <tr key={hotel._id}>
+                <tr key={hotel._id}className={styles.col} >
                   <td>{hotel.name}</td>
                   <td>{hotel.city || "-"}</td>
                   <td>{hotel.address || "-"}</td>
                   <td>₹{hotel.price || 0}</td>
                   <td className={styles.desc}>{hotel.description || "-"}</td>
                   <td>
-                    <DeleteHotel
+                    <DeleteHotel className={styles.delete}
                       hotelId={hotel._id}
                       onDelete={(id) =>
                         setData((prev) => prev.filter((h) => h._id !== id))

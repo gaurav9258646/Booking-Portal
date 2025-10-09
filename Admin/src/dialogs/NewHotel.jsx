@@ -12,7 +12,7 @@ const NewHotel = ({ addHotel }) => {
       </button>
 
       {open && (
-        <HotelDialog addHotel={addHotel} open={open} onClose={() => setOpen(false)} />
+        <HotelDialog addHotel={addHotel} open={open} onClose={() => setOpen(false)}/>
       )}
     </div>
   );
@@ -27,8 +27,7 @@ const HotelDialog = ({ addHotel, open, onClose }) => {
     description: "",
     price: "",
     amenities: "",
-    image: "",
-  });
+    });
 
   const handleChange = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
