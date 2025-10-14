@@ -21,7 +21,9 @@ const Login = () => {
       const url = import.meta.env.VITE_SERVER_URL;
       const res = await fetch(`${url}/users/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json"
+         },
         body: JSON.stringify(formState),
       });
       const data = await res.json();
