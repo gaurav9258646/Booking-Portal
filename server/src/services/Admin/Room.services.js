@@ -6,11 +6,12 @@ const  createRoomDB = async (roomData) => {
 };
 
 const  getAllRoomsDB  = async () => {
-  return await Room.find().populate("hotel","name")
+  return await Room.find().populate("hotel", "name slug")
+   
 };
 
 const  getRoomByIdDB  = async (id) => {
-  return await Room.findById(id).populate("hotel","name");
+  return await Room.findById(id).populate("hotel","name slug");
 };
 
 const getRoomsByHotelSlugDB = async (slug) => {
