@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../components/Layout'
+import Layout from '../Components/Layout'
+import NewRoom from '../dialogs/NewRoom';
+import DeleteRoom from '../dialogs/Delete.Room';
 import styles from '../styles/room.module.css'
 
 function Room() {
 
   const [data,setData]  = useState([]);
+  const [hotel,setHotel]=useState([]);
   const  [loading,setLoading] = useState(false);
   const [error,setError]  = useState(null);
 
@@ -36,7 +39,25 @@ function Room() {
           return;
         }
         setData(result.data ||[]);
+        
 
+        // fetch hotel API
+        const res2 = await fetch (`${url}/hotels/all`,{
+            method:"GET",
+            headers:{
+              "Content-Type":"application/json",
+              Authorization : `Bearer ${localStorage.getItem("token")}`,
+
+            },
+        });
+        const data=await res2.json();
+        console.log("hotel data",data);
+
+        if(!data.success){
+          return alert(data.error);
+        }
+
+        setHotel(data.data);
         
       }catch(err){
         console.log(err);
@@ -53,8 +74,9 @@ function Room() {
       
       {/* <div className={styles.header}>
         <h1 className={styles.title}>Rooms</h1>
-        <NewRoom addRoom={addRoom} />
-      </div> */}
+        </div> */}
+        <NewRoom addRoom={addRoom} setHotel={setHotel}/>
+
 
       {loading && <p className={styles.message}>Loading...</p>}
       {error && <p className={styles.message}>{error}</p>}
@@ -89,12 +111,12 @@ function Room() {
                   <td>{room.is_available ? 'Yes' : 'No'}</td>
                   <td>{room.discount ? `${room.discount}%` : '-'}</td>
                   <td>
-                    {/* <DeleteRoom
+                    <DeleteRoom
                       roomId={room._id}
                       onDelete={(id) =>
                         setData((prev) => prev.filter((r) => r._id !== id))
                       }
-                    /> */}
+                    />
                   </td>
                 </tr>
               ))}

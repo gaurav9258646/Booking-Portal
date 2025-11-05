@@ -1,41 +1,101 @@
-.dashboard {
-  padding: 20px;
+
+.container {
+  padding: 2rem;
+  background-color: #f8fafc;
+  min-height: 100vh;
 }
 
-.heading {
-  font-size: 22px;
+.title {
+  text-align: center;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 16px;
-  color: #111827;
+  color: #1e293b;
+  margin-bottom: 2rem;
 }
 
-.cards {
+.cardsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.8rem;
+  justify-content: center;
 }
 
 .card {
-  padding: 20px;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: 600;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.8rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem auto;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.cardTitle {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+}
+
+.cardValue {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .blue {
-  background: #3b82f6;
+  border-top: 5px solid #3b82f6;
 }
 
 .green {
-  background: #10b981;
+  border-top: 5px solid #22c55e;
 }
 
 .orange {
-  background: #f59e0b;
+  border-top: 5px solid #f59e0b;
 }
 
 .yellow {
-  background: #fbbf24;
+  border-top: 5px solid #eab308;
+}
+
+.blue .icon {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+.green .icon {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+}
+
+.orange .icon {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.yellow .icon {
+  background: linear-gradient(135deg, #eab308, #facc15);
+}
+
+@media (max-width: 600px) {
+  .cardValue {
+    font-size: 1.4rem;
+  }
+  .title {
+    font-size: 1.6rem;
+  }
 }

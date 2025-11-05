@@ -17,7 +17,6 @@ const NewHotel = ({ addHotel }) => {
     </div>
   );
 };
-
 const HotelDialog = ({ addHotel, open, onClose }) => {
   const [loading, setLoading] = React.useState(false);
   const [formState, setFormState] = React.useState({
