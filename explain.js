@@ -76,7 +76,7 @@
 // let { age: az } = { name: "abc", age: 20, gender: "male" };
 // console.log(az);
 
-// // find the index That’s a Multiple of Both 3 and 7.
+// find the index That’s a Multiple of Both 3 and 7.
 // const nums = [10, 21, 33, 49, 84, 100, 105];
 
 // const res = nums.findIndex((n) => n % 3 === 0 && n % 7 === 0);
@@ -100,20 +100,21 @@
 
 
 // Group Users by Age
-const usersData = [
-  { name: "Alice", age: 25 },
-  { name: "Bob", age: 30 },
-  { name: "Charlie", age: 25 },
-];
+// const usersData = [
+//   { name: "Alice", age: 25 },
+//   { name: "Bob", age: 30 },
+//   { name: "Charlie", age: 25 },
+// ];
 
-const res = usersData.reduce((acc, cur) => {
-  const age = cur.age;
-  if (acc[age]) {
-    acc[age].push(cur);
-  } else {
-    acc[age] = [cur];
-  }
-  return acc;
-}, {});
+// const res = usersData.reduce((acc, cur) => {
+//   const age = cur.age;
+//   if (acc[age]) {
+//     acc[age].push(cur);
+//   } else {
+//     acc[age] = [cur];
+//   }
+//   return acc;
+// }, {});
 
-console.log(res);
+// console.log(res);
+

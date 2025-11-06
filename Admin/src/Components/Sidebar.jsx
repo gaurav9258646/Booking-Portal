@@ -16,9 +16,9 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
       <div className={styles.linkContainer}>
         <SideLink to="/" label="Dashboard" icon={<FaHome />} />
-        <SideLink to="/bookings" label="Booking" icon={<FaBook />} />
         <SideLink to="/hotel" label="Hotel" icon={<FaHotel />} />
-        <SideLink to="/room" label="Room" icon={<FaBed />} />
+        <SideLink to="/room" label="Room" icon={<FaBed />} /> 
+        <SideLink to="/bookings" label="Booking" icon={<FaBook />} />
         <SideLink to="/setting" label="Setting" icon={<FaCog />} />
         <SideLink to="/users" label="Users" icon={<FaUsers />} />
       </div>
