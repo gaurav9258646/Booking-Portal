@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 64px;
+  height: 69px;
   background-color: #0f172a;
   color: #f8fafc;
   display: flex;
@@ -21,9 +21,9 @@
 }
 
 .logo {
-  width: 98px;
-  height: 98px;
-  object-fit: contain;
+  width: 100px;
+  height: 70px;
+  object-fit: contain;  
 }
 
 .title {

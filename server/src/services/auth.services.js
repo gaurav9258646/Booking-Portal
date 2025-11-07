@@ -10,5 +10,15 @@ const finduserDB=async(email)=>{
     const user= await User.findOne({email});
         return user;
 }
+const getAllusersDB = async () => {
+  try {
+    const users = await User.find({}, "name email phone password");
+    return users;
+  } catch (err) {
+    console.log("getAllusersDB error:", err);
+    throw err;
+  }
+};
 
-module.exports={registerUserDB,finduserDB}
+
+module.exports={registerUserDB,finduserDB,getAllusersDB}

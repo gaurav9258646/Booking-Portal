@@ -2,7 +2,7 @@ import { ShieldUser, Search } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { appStore } from '../store/app.store';
 import { authStore } from '../store/auth.store';
-import logo from "../assets/hotel.png";
+import logo from "../assets/logo_one.png";
 import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {

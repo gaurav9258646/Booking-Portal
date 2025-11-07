@@ -18,7 +18,6 @@ app.get("/",(req,res)=>{
 });
 app.use("/users", userRoutes);
 app.use(verifytoken)
-
 app.use("/hotels", hotelRoutes) 
 app.use("/booking",BookingRoutes)
 app.use("/room",RoomRoutes)

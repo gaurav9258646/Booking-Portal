@@ -21,6 +21,7 @@ const Hotels = () => {
 
         const url = import.meta.env.VITE_SERVER_URL;
         const res = await fetch(`${url}/hotels/all`, {
+           method:"GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
