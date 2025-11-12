@@ -1,10 +1,10 @@
 // // const data = [
-// //   { id: 1, subject: "Math" },
-// //   { id: 2, subject: "Science" },
-// //   { id: 3, subject: "English" },
-// //   { id: 1, subject: "Science" },
-// //   { id: 2, subject: "Math" },
-// //   { id: 3, subject: "Computer" },
+//   { id: 1, subject: "Math" },
+//   { id: 2, subject: "Science" },
+//   { id: 3, subject: "English" },
+//   { id: 1, subject: "Science" },
+//   { id: 2, subject: "Math" },
+//   { id: 3, subject: "Computer" },
   
 
 // // ];
@@ -117,4 +117,5 @@
 // }, {});
 
 // console.log(res);
+
 

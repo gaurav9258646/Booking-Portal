@@ -19,8 +19,8 @@ const Sidebar = () => {
         <SideLink to="/hotel" label="Hotel" icon={<FaHotel />} />
         <SideLink to="/room" label="Room" icon={<FaBed />} /> 
         <SideLink to="/bookings" label="Booking" icon={<FaBook />} />
-        <SideLink to="/setting" label="Setting" icon={<FaCog />} />
         <SideLink to="/users" label="Users" icon={<FaUsers />} />
+        <SideLink to="/setting" label="Setting" icon={<FaCog />} />
       </div>
     </div>
   );

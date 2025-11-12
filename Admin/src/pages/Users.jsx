@@ -12,7 +12,9 @@ function Users() {
       try {
         setLoading(true);
         const url = import.meta.env.VITE_SERVER_URL;
+        console.log(url)
         const res = await fetch(`${url}/users/all`, {
+          
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +41,7 @@ function Users() {
   return (
     <Layout>
       <div className={styles.container}>
-        <h2 className={styles.title}>All Users</h2>
+        <h2 className={styles.title}>ALL USERS</h2>
 
         {loading && <p className={styles.loading}>Loading users...</p>}
         {error && <p className={styles.error}>{error}</p>}

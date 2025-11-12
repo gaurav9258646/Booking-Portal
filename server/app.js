@@ -6,6 +6,7 @@ const hotelRoutes = require("./src/routes/Admin/hotels.routes")
 const BookingRoutes = require("./src/routes/Booking.routes")
 const RoomRoutes = require("./src/routes/Admin/Room.routes")
 const verifytoken = require("./src/middleware/role.middleware");
+const imageRoutes = require("./src/routes/Admin/image.routes");
 const  app = express();
 const dotenv = require("dotenv");
 dotenv.config();
@@ -21,6 +22,8 @@ app.use(verifytoken)
 app.use("/hotels", hotelRoutes) 
 app.use("/booking",BookingRoutes)
 app.use("/room",RoomRoutes)
+app.use("/image",imageRoutes)
+
 
 const PORT =3000;
 
