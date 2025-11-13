@@ -65,7 +65,7 @@ const Login = () => {
           value={formState.email}
           update={setFormState}
           label="Email"
-          type="email"
+          type="email" 
           placeholder="Enter your email"
         />
         <InputField
