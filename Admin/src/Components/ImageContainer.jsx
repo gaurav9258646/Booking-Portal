@@ -1,18 +1,71 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from "react";
+import styles from "../styles/ImageContainer.module.css";
 
-function ImageContainer() { 
-    const [image,setImage] = useState(null);
-    const [preview,setPreview] = useState(null);
-    const [loading,setLoading] = useState(true);
+const ImageContainer = ({ hotelId }) => {
+  const [loading, setLoading] = useState(false);
 
-    const cloudName = import.meta.env.VITE_CLOUDINARY_PRESET_NAME;
-    const  preset = import.meta.env.CLOUDUINARY_SECRET_API_KEY;
-    
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file || !hotelId) return;
 
-    // useEffect(()=>{},[id])
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "Hotel_booking");
+      formData.append("cloud_name", "dniero1iq");
+
+      const cloudRes = await fetch(
+        "https://api.cloudinary.com/v1_1/dniero1iq/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const cloudData = await cloudRes.json();
+
+      console.log("Cloudinary response:", cloudData);
+
+      const serverUrl = import.meta.env.VITE_SERVER_URL;
+
+      await fetch(`${serverUrl}/hotels/update/${hotelId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          images: [
+            {
+              url: cloudData.secure_url,
+              public_id: cloudData.public_id,
+            },
+          ],
+        }),
+      });
+
+      alert("Image uploaded successfully");
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Image upload failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div>ImageContainer</div>
-  )
-}
+    <div className={styles.container}>
+      <input
+        type="file"
+        accept="image/*"
+        className={styles.uploadBtn}
+        onChange={handleUpload}
+      />
+      {loading && <span className={styles.loading}>Uploading...</span>}
+    </div>
+  );
+};
 
-export default ImageContainer
+export default ImageContainer;

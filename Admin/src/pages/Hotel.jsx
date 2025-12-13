@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import styles from "../styles/hotel.module.css";
 import NewHotel from "../dialogs/NewHotel";
-import DeleteHotel from "../dialogs/DeleteHotel"; 
+import DeleteHotel from "../dialogs/DeleteHotel";
+import ImageContainer from "../Components/ImageContainer";
 
 const Hotels = () => {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ const Hotels = () => {
 
         const url = import.meta.env.VITE_SERVER_URL;
         const res = await fetch(`${url}/hotels/all`, {
-           method:"GET",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,19 +76,26 @@ const Hotels = () => {
             </thead>
             <tbody>
               {data.map((hotel) => (
-                <tr key={hotel._id}className={styles.col} >
+                <tr key={hotel._id} className={styles.col}>
                   <td>{hotel.name}</td>
                   <td>{hotel.city || "-"}</td>
                   <td>{hotel.address || "-"}</td>
                   <td>₹{hotel.price || 0}</td>
-                  <td className={styles.desc}>{hotel.description || "-"}</td>
-                  <td>
-                    <DeleteHotel className={styles.delete}
+                  <td className={styles.desc}>
+                    {hotel.description || "-"}
+                  </td>
+                  <td className={styles.actions}>
+                    <DeleteHotel
+                      className={styles.delete}
                       hotelId={hotel._id}
                       onDelete={(id) =>
-                        setData((prev) => prev.filter((h) => h._id !== id))
+                        setData((prev) =>
+                          prev.filter((h) => h._id !== id)
+                        )
                       }
                     />
+
+                    <ImageContainer hotelId={hotel._id} />
                   </td>
                 </tr>
               ))}

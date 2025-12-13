@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import styles from "../styles/booking.module.css";
 // import NewBooking from "../dialogs/NewBooking";
-// import DeleteBooking from "../dialogs/DeleteBooking";
+// import DeleteBooking from "../dialo
 
 const Bookings = () => {
   const [data, setData] = useState([]);

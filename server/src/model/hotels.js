@@ -12,7 +12,12 @@ const hotelSchema = new mongoose.Schema(
     phone_number: { type: String },
     email: { type: String },
     amenities: {type:String ,required:true},
-    // images: [String], 
+    images: [
+           {
+        url: { type: String, required: true },
+        public_id: { type: String, required: true },
+      },
+    ], 
 
     location: {
       lat: Number,
