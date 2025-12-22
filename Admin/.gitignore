@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 git add .
 git commit -m "Updated code"
 git push origin master
+=======
+>>>>>>> 35340f7b9e76b2c27323b657bf9c67ed8590db1c
 # Logs
 logs
 *.log

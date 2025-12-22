@@ -11,7 +11,11 @@
   border: 1px solid #ccc;
   cursor: pointer;
   background-color: #f5f5f5;
+<<<<<<< HEAD
 } 
+=======
+}
+>>>>>>> 35340f7b9e76b2c27323b657bf9c67ed8590db1c
 
 .uploadBtn:hover {
   background-color: #eaeaea;
