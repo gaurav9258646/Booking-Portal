@@ -1,0 +1,168 @@
+.hero {
+  height: 80vh;
+  background-image: url("../assets/room.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 80px 60px;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.content {
+  position: relative;
+  max-width: 520px;
+  z-index: 2;
+}
+
+.typing {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cursor {
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+.content p {
+  font-size: 14px;
+  margin: 14px 0 22px;
+  opacity: 0.9;
+}
+
+.bookBtn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.searchBar {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+  z-index: 3;
+}
+
+.searchField {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f7;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #333;
+  position: relative;
+}
+
+.fieldContent {
+  width: 100%;
+}
+
+.searchField span {
+  font-size: 12px;
+  color: #666;
+}
+
+.searchField input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+}
+
+.searchResults {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  list-style: none;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.searchResults li {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.searchResults li:hover {
+  background: #f1f1f1;
+}
+
+.searchBtn {
+  background: #08238e;
+  color: #fff;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.searchBtn:hover {
+  background: #0830cc;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+    padding: 60px 16px;
+    background-position: top;
+  }
+
+  .typing {
+    font-size: 30px;
+  }
+
+  .searchBar {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .searchBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

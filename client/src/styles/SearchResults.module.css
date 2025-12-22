@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 40px auto;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.sidebar {
+  flex: 1;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.mainList {
+  flex: 3;
+}
+
+.hotelCard {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.hotelImg {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.hotelDetails {
+  padding: 15px;
+  flex: 1;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #003580;
+}

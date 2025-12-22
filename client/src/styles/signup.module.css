@@ -1,0 +1,135 @@
+.container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #020617;
+}
+
+.form {
+  width: 900px;
+  height: 520px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(56, 189, 248, 0.35);
+  position: relative;
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.form::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+}
+
+.form::before {
+  content: "Glad to see You!\A Lorem ipsum dolor sit amet,\A consectetur adipiscing elit.";
+  white-space: pre-line;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-size: 21px;
+  line-height: 1.6;
+  z-index: 2;
+}
+
+.form h2 {
+  font-size: 26px;
+  padding-left: 30px;
+  font-family: sans-serif;
+  margin-bottom: 30px;
+  color: #0f172a;
+  position: relative;
+  z-index: 3;
+}
+span{
+  font-size: 21px;
+  padding: 8px;
+  font-weight: 400;
+}
+
+.message {
+  margin-bottom: 15px;
+  color: #ef4444;
+  font-size: 14px;
+  position: relative;
+  z-index: 3;
+}
+
+.input {
+  width: 330px;
+  padding: 13px 18px;
+  margin-bottom: 16px;
+  border-radius: 30px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+  position: relative;
+  z-index: 3;
+}
+
+.input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* Button */
+.button {
+  width: 330px;
+  padding: 13px;
+  border-radius: 30px;
+  border: none;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  z-index: 3;
+}
+
+.button:hover {
+  background: #0ea5e9;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .form {
+    width: 90%;
+    height: auto;
+    padding: 40px;
+  }
+
+  .form::before,
+  .form::after {
+    display: none;
+  }
+
+  .input,
+  .button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,86 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: left; 
+    font-weight: 600;
+}
+
+
+.cardsGrid {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-start;
+    flex-wrap: wrap; 
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px; 
+    height: 90x; 
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.blue {
+    background-color: #1e88e5; 
+}
+
+.green {
+    background-color: #43a047; 
+}
+
+.cardTitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cardValue {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 20px; 
+}
+
+.icon {
+   
+    opacity: 0.8;
+  
+}
+
+@media (max-width: 600px) {
+    .cardsGrid {
+        justify-content: center;
+    }
+
+    .card {
+        width: 100%; 
+        max-width: 300px; 
+    }
+
+    .cardValue {
+        font-size: 4rem;
+    }
+}
