@@ -6,25 +6,48 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     setError("");
 
+    if (!email || !password) {
+      setError("Email and Password are required");
+      return;
+    }
+
     try {
-      const res = await axios.post(
-      
-        { email, password }
-      );
+      setLoading(true);
+      const url = import.meta.env.VITE_SERVER_URL;
 
-      localStorage.setItem("token", res.data.token);
+      const res = await fetch(`${url}/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      console.log("Login Success:", res.data);
+      const data = await res.json();
 
-      navigate("/dashboard");
+      if (!data.success) {
+        setError(data.error || "Invalid credentials");
+        return;
+      }
+
+      localStorage.setItem("token", data.data.accessToken);
+      localStorage.setItem("refresh", data.data.refreshToken);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
+
+      navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      console.error(err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,7 +55,7 @@ const Login = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>Login</h2>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={submitHandler} className={styles.form}>
         {error && <p className={styles.error}>{error}</p>}
 
         <input
@@ -40,7 +63,6 @@ const Login = () => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
           className={styles.input}
         />
 
@@ -49,12 +71,11 @@ const Login = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
           className={styles.input}
         />
 
-        <button type="submit" className={styles.button}>
-          Login
+        <button type="submit" className={styles.button} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <p className={styles.signupText}>
