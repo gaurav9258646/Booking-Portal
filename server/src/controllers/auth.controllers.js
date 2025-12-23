@@ -1,41 +1,54 @@
-const { registerUserDB, finduserDB, getAllusersDB } = require("../services/auth.services");
+const bcrypt = require("bcrypt");
+const {
+  registerUserDB,
+  finduserDB,
+  getAllusersDB,
+} = require("../services/auth.services");
 const { generateToken } = require("../utils/index");
 
 const register = async (req, res) => {
-  const { name, email, password, phone, role } = req.body;
+  let { name, email, password, phone, role } = req.body;
 
-  if (!name || !email || !password || !phone) {
+  if (!name || !email || !password) {
     return res.json({
       success: false,
       error: "All fields are required",
-      required: ["name", "email", "password", "phone"],
     });
   }
 
+  email = email.toLowerCase();
+
   try {
-    const user = await registerUserDB({ name, email, password, phone, role: role || "user" });
+    const user = await registerUserDB({
+      name,
+      email,
+      password,
+      phone,
+      role,
+    });
+
     return res.json({
       success: true,
-      data: user,
       message: "User registered successfully",
+      data: user,
     });
   } catch (error) {
-    console.log("register error:", error);
     if (error.code === 11000) {
       return res.json({
         success: false,
-        error: "User already exists!",
+        error: "User already exists",
       });
     }
-    res.json({
+
+    return res.json({
       success: false,
-      error: "User registration failed",
+      error: "Registration failed",
     });
   }
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
 
   if (!email || !password) {
     return res.json({
@@ -44,29 +57,44 @@ const login = async (req, res) => {
     });
   }
 
+  email = email.toLowerCase();
+
   try {
     const user = await finduserDB(email);
     if (!user) {
       return res.json({
         success: false,
-        error: "User doesn't exist!",
+        error: "Invalid credentials",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.json({
+        success: false,
+        error: "Invalid credentials",
       });
     }
 
     const { accessToken, refreshToken } = generateToken({
       id: user._id,
-      name: user.name,
-      email: user.email,
       role: user.role,
     });
 
-    return res.json({
+    const safeUser = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+    };
+
+    res.json({
       success: true,
-      message: "User logged in successfully",
-      data: { user, accessToken, refreshToken },
+      message: "Login successful",
+      data: { user: safeUser, accessToken, refreshToken },
     });
   } catch (error) {
-    console.log("login error:", error);
     return res.json({
       success: false,
       error: "Something went wrong",
@@ -76,17 +104,15 @@ const login = async (req, res) => {
 
 const getusers = async (req, res) => {
   try {
-    const data = await getAllusersDB();
+    const users = await getAllusersDB();
     return res.json({
       success: true,
-      message: "All users list",
-      data,
+      data: users,
     });
   } catch (error) {
-    console.error("getusers error:", error);
     return res.status(500).json({
       success: false,
-      message: "Something went wrong on server",
+      error: "Server error",
     });
   }
 };

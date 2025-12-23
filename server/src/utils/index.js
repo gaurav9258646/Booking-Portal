@@ -1,19 +1,46 @@
-const jwt=require("jsonwebtoken");
-const generateSlug=(name)=>{
-    return name.toLowerCase().trim().replace(/\s+/g, "-").replaceAll("|", "").replaceAll("&", "");
+const jwt = require("jsonwebtoken");
+
+const generateSlug = (name) => {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[|&]/g, "");
+};
+
+//  SECURE TOKEN GENERATOR
+const generateToken = (data) => {
+  const payload = {
+    id: data.id,
+    role: data.role,
   };
 
+  const accessToken = jwt.sign(
+    payload,
+    process.env.JWT_SECRET,
+    { expiresIn: "15m" }
+  );
 
+  const refreshToken = jwt.sign(
+    payload,
+    process.env.JWT_REFRESH_SECRET,
+    { expiresIn: "7d" }
+  );
 
-  const generateToken=(data)=>{
-      const accessToken= jwt.sign(data,process.env.JWT_SECRET,{expiresIn:"30d"});
-      const refreshToken= jwt.sign(data,process.env.JWT_SECRET,{expiresIn:"30d"});
-      return {accessToken,refreshToken};
-  };
+  return { accessToken, refreshToken };
+};
 
-  const verifyToken = (token)=>{
-    return jwt.verify(token,process.env.JWT_SECRET);
+// SAFE VERIFY
+const verifyToken = (token) => {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return null;
   }
+};
 
-  module.exports={generateSlug,generateToken,verifyToken };
-
+module.exports = {
+  generateSlug,
+  generateToken,
+  verifyToken,
+};
