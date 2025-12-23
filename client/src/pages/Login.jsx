@@ -25,9 +25,7 @@ const Login = () => {
 
       const res = await fetch(`${url}/users/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
@@ -44,7 +42,6 @@ const Login = () => {
 
       navigate("/");
     } catch (err) {
-      console.error(err);
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -53,9 +50,9 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Login</h2>
-
       <form onSubmit={submitHandler} className={styles.form}>
+        <h2 className={styles.title}>Login</h2>
+
         {error && <p className={styles.error}>{error}</p>}
 
         <input
